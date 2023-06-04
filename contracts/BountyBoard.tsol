@@ -28,7 +28,7 @@ contract BountyBoard {
 
     event oracleQuery(Bounty bounty);
 
-    constructor(address oracle) {
+    constructor(address oracle) public {
         tvm.accept();
         ORACLE_ADDRESS = oracle;
     }
@@ -118,12 +118,12 @@ contract BountyBoard {
         msg.sender.transfer({value: currBounty.amount, flag: 0, bounce: false});
         msg.sender.transfer({value: 0, flag: 128, bounce: false});
     }
-    function resetBounty(uint256 index) public {
+    function reassignBounty(uint256 index) public {
         tvm.accept();
         tvm.rawReserve(1 ever, 0);
         Bounty currBounty = bounties[index];
         require(msg.sender == currBounty.issuer && currBounty.status == Status.closed, 101, "Not the issuer");
-        bounties[index] = Bounty({status: Status.available, open: currBounty.open, issuer: currBounty.issuer, amount: 0, githubIssue: currBounty.githubIssue, pullRequest: currBounty.pullRequest, assigned: currBounty.assigned});
+        bounties[index] = Bounty({status: Status.closed, open: currBounty.open, issuer: currBounty.issuer, amount: 0, githubIssue: currBounty.githubIssue, pullRequest: currBounty.pullRequest, assigned: currBounty.assigned});
         msg.sender.transfer({value: currBounty.amount, flag: 0, bounce: false});
         msg.sender.transfer({value: 0, flag: 128, bounce: false});
     }
