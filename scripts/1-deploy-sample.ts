@@ -7,7 +7,6 @@ async function main() {
       _nonce: locklift.utils.getRandomNonce(),
     },
     constructorParams: {
-      _state: 0,
     },
     value: locklift.utils.toNano(3),
   });
