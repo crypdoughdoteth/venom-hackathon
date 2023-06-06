@@ -28,9 +28,9 @@ contract BountyBoard {
 
     event oracleQuery(Bounty bounty);
 
-    constructor(address oracle) public {
+    constructor() public {
         tvm.accept();
-        ORACLE_ADDRESS = oracle;
+        ORACLE_ADDRESS = msg.sender;
     }
 
     function initBounty(bool open, uint128 deposit, string ghIssue) external {
