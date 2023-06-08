@@ -33,6 +33,10 @@ contract BountyBoard {
         ORACLE_ADDRESS = msg.sender;
     }
 
+    function getBounty(uint256 index) public view returns (Bounty) {
+        return bounties[index];
+    }   
+    
     function initBounty(bool open, uint128 deposit, string ghIssue) external {
         require(deposit >= msg.value + 1 ever, 101, "Insufficient deposit amount"); // if we using require, we are frozing incoming value in this contract, so just return it         
         tvm.rawReserve(1 ever, 0); // we will always reserve 1 venom on this contract
